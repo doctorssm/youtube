@@ -1,18 +1,15 @@
+// import { default as data} from './../data/data.json';
+
 export default class AppModel {
   constructor(state) {
     this.state = state;
   }
 
-  static extractClipNames(data) {
-    return data.items.map(clip => clip.snippet.title);
-  }
+  async getClips(value = '') {
+    const url = `${this.state.url}&q=${value}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-  async getClipNames() {
-    const { url } = this.state;
-
-    const responce = await fetch(url);
-    const data = await responce.json();
-
-    return AppModel.extractClipNames(data);
+    return data.items;
   }
 }
