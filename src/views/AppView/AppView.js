@@ -3,7 +3,7 @@ export default class AppView {
     this.clips = clips;
   }
 
-  init() {
+  render() {
     this.renderInput();
     this.renderList(this.clips);
   }

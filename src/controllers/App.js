@@ -14,7 +14,7 @@ export default class App {
     const data = await this.model.getClips();
     this.view = new AppView(data);
 
-    this.view.init();
+    this.view.render();
     this.addHandlers();
   }
 
