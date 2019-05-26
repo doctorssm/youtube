@@ -1,5 +1,6 @@
 import AppModel from '../models/AppModel';
 import AppView from '../views/AppView';
+import { debounce } from 'lodash';
 
 export default class App {
   constructor() {
@@ -19,10 +20,12 @@ export default class App {
 
   addHandlers() {
     document.querySelector('input')
-      .addEventListener('input', (e) => {
-        this.model.getClips(e.target.value).then((clips) => {
-          this.view.renderList(clips);
-        })
-      });
+      .addEventListener('input', debounce(this.inputHandler.bind(this), 500));
+  }
+
+  inputHandler(e) {
+    this.model.getClips(e.target.value).then((clips) => {
+      this.view.renderList(clips);
+    })
   }
 }
